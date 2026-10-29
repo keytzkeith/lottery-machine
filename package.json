@@ -1,0 +1,25 @@
+{
+  "name": "lottery-machine",
+  "version": "1.0.0",
+  "description": "A slot machine that enables the user to deposit some amount and spin by betting on some number of lines. When a user gets a matching numbers of symbols on a row, it is a win",
+  "keywords": [
+    "lottery",
+    "slot",
+    "machine",
+    "spin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "github.com/keytzkeith/lottery-machine"
+  },
+  "license": "MIT",
+  "author": "Codem Graphics",
+  "type": "commonjs",
+  "main": "project.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
+}
