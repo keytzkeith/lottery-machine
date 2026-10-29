@@ -5,3 +5,16 @@
 // 5. Check if the user won
 // 6. Give the user their winnings
 // 7. Play again
+
+const prompt = require("prompt-sync")()
+
+const deposit = () => {
+    let depositAmount = prompt("Enter the amount you wish to deposit: ")
+    const depositAmountInt = parseFloat(depositAmount)
+    while (isNaN(depositAmountInt) || depositAmount < 0) {
+        depositAmount = prompt("Enter the amount you wish to deposit: ")
+    }
+    console.log("Invalid Amount, try again")
+
+}
+deposit()
