@@ -8,16 +8,33 @@
 
 const prompt = require("prompt-sync")()
 
+const ROWS = 3
+const COLS = 3
+
+const SYMBOL_COUNT = {
+    "🔥": 2,
+    "😎": 4,
+    "🍕": 6,
+    "🍜": 8
+}
+
+const SYMBOL_VALUE = {
+    "🔥": 5,
+    "😎": 4,
+    "🍕": 3,
+    "🍜": 2
+}
+
 // Get user deposit and validate is a number
 const deposit = () => {
     while (true) {
         const depositAmount = prompt("Enter the amount you wish to deposit: ")
-        const depositAmountInt = parseFloat(depositAmount)
-        if (isNaN(depositAmountInt) || depositAmountInt <= 0) {
+        const depositNumber = parseFloat(depositAmount)
+        if (isNaN(depositNumber) || depositNumber <= 0) {
             console.log("You entered an invalid amount, try again.")
         } else
-            return depositAmountInt
-            // break
+            return depositNumber
+        // break
     }
 }
 
@@ -25,14 +42,40 @@ const deposit = () => {
 const getNumberOfLines = () => {
     while (true) {
         const numberOfLines = prompt("Enter the number of lines to bet on (1-3): ")
-        const numberOfLinesInt = parseFloat(numberOfLines)
-        if (isNaN(numberOfLinesInt) || numberOfLinesInt <= 0 || numberOfLinesInt > 3) {
+        const linesNumber = parseFloat(numberOfLines)
+        if (isNaN(linesNumber) || linesNumber <= 0 || linesNumber > 3) {
             console.log("You entered an invalid number, try again (0-3).")
         } else
-            return numberOfLinesInt
+            return linesNumber
         // break
     }
 }
 
-deposit()
-getNumberOfLines()
+// Collect a bet amount
+const getBet = (balance, lines) => {
+    while (true) {
+        const betAmnt = prompt("Enter the amount you wish to bet per line: ")
+        const betNumber = parseFloat(betAmnt)
+        if (isNaN(betNumber) || betNumber <= 0 || betNumber > balance / lines) {
+            console.log(`Your bet is invalid, try again with amount equal to or less than $${balance / lines}.`)
+        } else
+            return betNumber
+        // break
+    }
+}
+
+// Spin the machine
+const spin = () => {
+    const symbols = []
+    for(const [symbol, count] of Object.entries(SYMBOL_COUNT)) {
+        for(let i = 0; i < count; i++) {
+            symbols.push(symbol)
+        }
+        console.log(symbols)
+    }
+}
+
+spin()
+let balance = deposit()
+const lines = getNumberOfLines()
+getBet(balance, lines)
