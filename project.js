@@ -8,13 +8,31 @@
 
 const prompt = require("prompt-sync")()
 
+// Get user deposit and validate is a number
 const deposit = () => {
-    let depositAmount = prompt("Enter the amount you wish to deposit: ")
-    const depositAmountInt = parseFloat(depositAmount)
-    while (isNaN(depositAmountInt) || depositAmount < 0) {
-        depositAmount = prompt("Enter the amount you wish to deposit: ")
+    while (true) {
+        const depositAmount = prompt("Enter the amount you wish to deposit: ")
+        const depositAmountInt = parseFloat(depositAmount)
+        if (isNaN(depositAmountInt) || depositAmountInt <= 0) {
+            console.log("You entered an invalid amount, try again.")
+        } else
+            return depositAmountInt
+            // break
     }
-    console.log("Invalid Amount, try again")
-
 }
+
+// Determine the number of lines they want to bet on
+const getNumberOfLines = () => {
+    while (true) {
+        const numberOfLines = prompt("Enter the number of lines to bet on (1-3): ")
+        const numberOfLinesInt = parseFloat(numberOfLines)
+        if (isNaN(numberOfLinesInt) || numberOfLinesInt <= 0 || numberOfLinesInt > 3) {
+            console.log("You entered an invalid number, try again (0-3).")
+        } else
+            return numberOfLinesInt
+        // break
+    }
+}
+
 deposit()
+getNumberOfLines()
